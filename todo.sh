@@ -6,7 +6,6 @@ DIR_WORK=$PWD
 
 DIR_LOG=$DIR_WORK/LOG
 FIC_LOG=$DIR_LOG/$(basename $0).$NOM.log
-
 [ -d $DIR_LOG ] || mkdir -p $DIR_LOG
 
 exec > >(tee $FIC_LOG) 2>&1
