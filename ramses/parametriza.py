@@ -1,5 +1,4 @@
 #! /usr/bin/python3
-
 import soundfile as sf
 import tqdm
 import numpy as np
@@ -43,11 +42,14 @@ Usage:
     {sys.argv[0]} -h | --help
     {sys.argv[0]} --version
 
-Opciones:
+Opcions:
     -s PATH, --dirSen=PATH  Directorio con las señales temporales [default: .]
     -p PATH, --dirPrm=PATH  Directorio con las señales parametrizadas [default: .]
-    -x SCRIPT...,--execPre=SCRIPT...  Script(s) Python previos
-    -f EXPR,--funcPrm=EXPR  Expresion Python parametrizacion 
+    -h, --help  Muestra este mensaje de ayuda
+    -x SCRIPT..., --execPre=SCRIPT...  Scripts a ejecutar con anterioridad
+    -f EXPR, --funcPrm=EXPR  Expresión Python parametrización
+    --version  Muestra la versión del programa
+
 Argumentos:
     <guiSen>  Nombre del fichero guía con los nombres de las señales a parametrizar.
               Pueden especificarse tantos ficheros guía como sea necesario.
