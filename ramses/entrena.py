@@ -63,9 +63,9 @@ Opciones:
     -m PATH, --dirMod=PATH  Directorio con los modelos generados [default: .]
 
 Argumentos:
-    <guiSen>   Nombre del fichero guía con los nombres de las señales usadas en el
-               entrenamiento. Pueden especificarse tantos ficheros guía como sea
-               necesario.
+    <guiSen>  Nombre del fichero guía con los nombres de las señales usadas en el
+              entrenamiento. Pueden especificarse tantos ficheros guía como sea
+              necesario.
 
 Entrenamiento:
     El programa lee los contenidos fonéticos de los ficheros de marcas y entrena los
@@ -73,7 +73,7 @@ Entrenamiento:
 """
 
     args = docopt(Sinopsis, version=f'{sys.argv[0]}: Ramses v3.4 (2020)')
-
+    
     dirPrm = args['--dirPrm']
     dirMar = args['--dirMar']
     dirMod = args['--dirMod']
