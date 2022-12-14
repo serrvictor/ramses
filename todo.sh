@@ -1,6 +1,8 @@
 #! /bin/bash
 
-NOM=trivial
+for eps in 0.01 0.1 1 10 100; do
+
+NOM=epsilon.$eps
 
 DIR_WORK=$PWD
 
@@ -61,7 +63,7 @@ execPre="-x $EXEC_PRE"
 funcPrm="-f $FUNCPRM"
 echo "import numpy as np" | tee $EXEC_PRE
 echo "def $FUNCPRM(x):" | tee -a $EXEC_PRE
-echo "  return np.abs(np.fft.fft(x)) ** 2" | tee -a $EXEC_PRE
+echo "  return 10 * np.log10($eps + np.abs(np.fft.fft(x)) ** 2)" | tee -a $EXEC_PRE
 dirSen="-s $DIR_SEN"
 dirPrm="-p $DIR_PRM"
 
@@ -88,3 +90,5 @@ dirMar="-a $DIR_MAR"
 
 EXEC="evalua.py $dirRec $dirMar $GUI_REC"
 $EVA && echo $EXEC && $EXEC | tee $FIC_RES || exit 1
+
+done
