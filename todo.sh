@@ -1,6 +1,8 @@
 #! /bin/bash
-
-NOM=trivial
+#for eps in $(seq 1.0 0.5 20.0) ; do
+eps=10
+numCof=20
+NOM=cepstrum.$eps.$numCof
 
 DIR_WORK=$PWD
 
@@ -59,9 +61,24 @@ EXEC_PRE=$DIR_PRM/$FUNCPRM.py
 [ -d $(dirname $EXEC_PRE) ] || mkdir -p $(dirname $EXEC_PRE)
 execPre="-x $EXEC_PRE"
 funcPrm="-f $FUNCPRM"
+
 echo "import numpy as np" | tee $EXEC_PRE
 echo "def $FUNCPRM(x):" | tee -a $EXEC_PRE
-echo "  return np.abs(np.fft.fft(x)) ** 2" | tee -a $EXEC_PRE
+echo "  return 10 * np.log10($eps + np.abs(np.fft.fft(x)) ** 2)" | tee -a $EXEC_PRE
+dirSen="-s $DIR_SEN"
+dirPrm="-p $DIR_PRM"
+
+FUNCPRM=cepstrum
+EXEC_PRE=$DIR_PRM/$FUNCPRM.py
+[ -d $(dirname $EXEC_PRE) ] || mkdir -p $(dirname $EXEC_PRE)
+execPre="-x $EXEC_PRE"
+funcPrm="-f $FUNCPRM"
+
+echo "import numpy as np" | tee $EXEC_PRE
+echo "def $FUNCPRM(x):" | tee -a $EXEC_PRE
+echo "  logPdgm = 10 * np.log10($eps + np.abs(np.fft.fft(x)) ** 2)" | tee -a $EXEC_PRE
+echo "  ceps = np.real(np.fft.ifft(logPdgm))" | tee -a $EXEC_PRE
+echo "  return ceps[1:$numCof+1]" | tee -a $EXEC_PRE
 dirSen="-s $DIR_SEN"
 dirPrm="-p $DIR_PRM"
 
@@ -88,3 +105,5 @@ dirMar="-a $DIR_MAR"
 
 EXEC="evalua.py $dirRec $dirMar $GUI_REC"
 $EVA && echo $EXEC && $EXEC | tee $FIC_RES || exit 1
+
+#done

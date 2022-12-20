@@ -27,11 +27,11 @@ def entrena(dirMod, dirMar, dirPrm, *guiSen):
         prm = leePrm(pathPrm)
 
         if mod not in modelos:
-            modelos[mod] = prm
-            numSen[mod] = 1
-        else:
-            modelos[mod] += prm
-            numSen[mod] += 1
+            modelos[mod] = 0
+            numSen[mod] = 0
+        
+        modelos[mod] += prm
+        numSen[mod] += 1
 
     for mod in modelos:
         modelos[mod] /= numSen[mod]
