@@ -50,7 +50,6 @@ class ModMLP:
         loss = self.funcLoss(salida, data.trn)
         loss.backward()
         return self
-
     def recaMod(self):
         self.optim.step()
 
@@ -80,7 +79,6 @@ from collections import namedtuple
 def lotesMLP(dirPrm, dirMar, ficLisUni, *ficListSen):
     unidades = leeLis(ficLisUni)
     numUni = len(unidades)
-
     Data = namedtuple("Data", ["sen", "prm", "trn"])
     lote = []
     for sen in leeLis(*ficListSen):
