@@ -5,10 +5,10 @@ def entorch(modelo, nomMod, lotesEnt, lotesDev=[], numEpo=1):
     print(f"Inicio de {numEpo} epocas de entrenamiento {dt.now()}")
     
     for epo in range(numEpo):
-        for lote in tqdm.tqdm(lotesEnt, ascii=" >="):
+        for lote in lotesEnt:
             modelo.inicEntr()
 
-            for data in lote:
+            for data in tqdm.tqdm(lote, ascii=" >="):
                 modelo += data
             
             modelo.recaMod()
@@ -16,8 +16,8 @@ def entorch(modelo, nomMod, lotesEnt, lotesDev=[], numEpo=1):
         modelo.escrMod(nomMod)
 
         modelo.inicEval()
-        for lote in tqdm.tqdm(lotesDev, ascii=" >="):
-            for data in lote:
+        for lote in lotesDev:
+            for data in tqdm.tqdm(lote, ascii=" >="):
                 modelo.addEval(data)
         if lotesDev:
             modelo.recaEval()
